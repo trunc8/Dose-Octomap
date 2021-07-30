@@ -44,5 +44,7 @@ roslaunch demonstrations dose_octomap_demo.launch paused:=True
 ### Author(s)
 
 * **Siddharth Saha** - [trunc8](https://github.com/trunc8)
+* [octomap Library](https://github.com/OctoMap/octomap)
+* [octomap_mapping ROS Package](https://github.com/OctoMap/octomap_mapping)
 
 <p align='center'>Created with :heart: by <a href="https://www.linkedin.com/in/sahasiddharth611/">Siddharth</a></p>
