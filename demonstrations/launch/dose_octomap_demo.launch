@@ -1,0 +1,34 @@
+<?xml version="1.0" ?>
+<launch>
+
+  <!-- Turtlebot3 gazebo environment -->
+  <include file="$(find turtlebot3_gazebo)/launch/turtlebot3_world.launch">
+    <arg name="x_pos" default="-2.0"/>
+    <arg name="y_pos" default="-0.5"/>
+    <arg name="z_pos" default="0.0"/>
+    <arg name="gui" value="true"/>
+  </include>
+
+
+  <!-- Turtlebot3 transform between frames -->
+  <include file="$(find turtlebot3_bringup)/launch/turtlebot3_remote.launch" />
+
+  <!-- Octomap Color Server -->
+  <node pkg="octomap_server" type="octomap_dose_server_node" name="octomap_dose_server">
+    <param name="resolution" value="0.05" />
+    <param name="frame_id" type="string" value="odom" />
+    <param name="sensor_model/max_range" value="5.0" />
+    <param name="height_map" value="false" />
+    <param name="colored_map" value="true" />
+    <!-- data source to integrate (PointCloud2) -->
+    <remap from="cloud_in" to="/camera/depth/points" />
+    <!-- <remap from="cloud_in" to="/point_cloud2" /> -->
+    <!-- <remap from="cloud_in" to="/euclidean_point_cloud2" /> -->
+  </node>
+
+  <!-- Load rviz with color octomap settings -->
+  <node pkg="rviz" type="rviz" name="rviz_name" args="-d $(find demonstrations)/rviz/dose_octomap_rviz.rviz" />
+
+
+
+</launch>
