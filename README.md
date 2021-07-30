@@ -1,10 +1,48 @@
-octomap_mapping [![Build Status](https://travis-ci.org/OctoMap/octomap_mapping.svg?branch=kinetic-devel)](https://travis-ci.org/OctoMap/octomap_mapping)
-===============
+# Dose Octomap
 
-ROS stack for mapping with OctoMap, contains the `octomap_server` package.
+### Pre-requisites
+- ROS Melodic installation with Gazebo9
+- Packages installed: `ros-melodic-turtlebot3-*`
+- ROS workspace at home directory: `~/catkin_ws`
 
-The main branch for Kinetic, Melodic, and Noetic is `kinetic-devel`.
+### Demo
+![Dose Octomap Demo](dose-octomap-demo.gif)
 
-Indigo: [![Build Status](https://travis-ci.org/OctoMap/octomap_mapping.svg?branch=indigo-devel)](https://travis-ci.org/OctoMap/octomap_mapping)
+### Steps to Replicate
 
-Imported from SVN, see https://code.google.com/p/alufr-ros-pkg/ for the previous versions.
+##### Setting up ROS Packages
+```sh
+cd ~/catkin_ws/src
+git clone git@github.com:trunc8/Dose-Octomap.git
+cd Dose-Octomap/octomap_server
+rosdep install --from-paths . --ignore-src --rosdistro melodic -y
+cd ~/catkin_ws
+catkin build -j3
+```
+
+##### Octomap Library
+```sh
+cd ~
+git clone -b library git@github.com:trunc8/Dose-Octomap.git
+cd Dose-Octomap/octomap/
+mkdir build && cd build
+cmake ..
+sudo make install
+sudo cp ../lib/liboctomap.* /opt/ros/melodic/lib/
+```
+
+##### Running the demonstration
+```sh
+### Optional steps commented below
+### You should ideally have these in your .bashrc or .zshrc
+# export TURTLEBOT3_MODEL=waffle
+# source /opt/ros/melodic/setup.sh
+# source ~/catkin_ws/devel/setup.sh
+roslaunch demonstrations dose_octomap_demo.launch paused:=True
+```
+
+### Author(s)
+
+* **Siddharth Saha** - [trunc8](https://github.com/trunc8)
+
+<p align='center'>Created with :heart: by <a href="https://www.linkedin.com/in/sahasiddharth611/">Siddharth</a></p>
